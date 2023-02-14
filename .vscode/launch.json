@@ -7,7 +7,7 @@
         {
             "name": "Unity Editor",
             "type": "unity",
-            "path": "/D:/eettcc/TransparentTree/Library/EditorInstance.json",
+            "path": "/D:/eettcc/TransparentTest/Library/EditorInstance.json",
             "request": "launch"
         },
         {

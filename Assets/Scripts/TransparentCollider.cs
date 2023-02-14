@@ -18,6 +18,8 @@ public class TransparentCollider : MonoBehaviour
         END,
     }
 
+    public bool UseDebug = false;
+
     public Material TransparentMaterial = null;
 
     private Color[] _transparencyColors;
@@ -58,10 +60,11 @@ public class TransparentCollider : MonoBehaviour
 
     private void Update()
     {
+        if (UseDebug == false)
+            return;
+
         for (int i = 0; i < Renderer.materials.Length; i++)
-        {
             OnScreenLog.Add(i, Renderer.materials[i].shader + " :: " + _transparencyColors[i] + " :: " + Renderer.materials[i].GetFloat(SHADER_PROPERTY_SURFACE));
-        }
     }
 
     public void SetTargetMaterial(in Material InMaterial)
@@ -79,6 +82,7 @@ public class TransparentCollider : MonoBehaviour
 
         Renderer.materials[1].shader = InMaterial.shader;
         Renderer.materials[1] = InMaterial;
+
     }
 
     public void StartTransparent() => OnTransparent(ETRANSPARENT_STATE.START, _currentTransparency, MIN_TRANSPARENT_VALUE, _FadeOut_Duration);
@@ -106,12 +110,17 @@ public class TransparentCollider : MonoBehaviour
             material.SetFloat(SHADER_PROPERTY_CASTSHADOWS, 1f);
             material.SetFloat(SHADER_PROPERTY_SURFACE, 1f);
             material.shader = _transparentShader;
+            material.SetFloat(SHADER_PROPERTY_CASTSHADOWS, 1f);
+            material.SetFloat(SHADER_PROPERTY_SURFACE, 1f);
         }
 
     }
 
     private IEnumerator CoTransparent(ETRANSPARENT_STATE InState, float InStart, float InEnd, float InDuration)
     {
+        if (InState == ETRANSPARENT_STATE.START)
+            ChangeShader();
+
         var elapsedTime = 0f;
 
         while (elapsedTime < InDuration)
@@ -120,8 +129,6 @@ public class TransparentCollider : MonoBehaviour
 
             for (int i = 0; i < Renderer.materials.Length; i++)
             {
-                Renderer.materials[i].SetFloat(SHADER_PROPERTY_CASTSHADOWS, 1f);
-                Renderer.materials[i].SetFloat(SHADER_PROPERTY_SURFACE, 1f);
                 _transparencyColors[i].a = _currentTransparency;
                 Renderer.materials[i].color = _transparencyColors[i];
             }

@@ -21,6 +21,8 @@ public class UIMain : MonoBehaviour
     [SerializeField] private Button Button_Place3 = null;
     [SerializeField] private Button Button_Place4 = null;
     [SerializeField] private Button Button_Place5 = null;
+    [SerializeField] private Button Button_Place6 = null;
+    [SerializeField] private Button Button_Place7 = null;
 
     [Space(20)]
     [SerializeField] private TextMeshProUGUI Text_Current = null;
@@ -74,6 +76,8 @@ public class UIMain : MonoBehaviour
         Button_Place3.onClick.AddListener(OnClicked_Place3);
         Button_Place4.onClick.AddListener(OnClicked_Place4);
         Button_Place5.onClick.AddListener(OnClicked_Place5);
+        Button_Place6.onClick.AddListener(OnClicked_Place6);
+        Button_Place7.onClick.AddListener(OnClicked_Place7);
     }
 
     private void OnDisable()
@@ -91,6 +95,8 @@ public class UIMain : MonoBehaviour
         Button_Place3.onClick.RemoveListener(OnClicked_Place3);
         Button_Place4.onClick.RemoveListener(OnClicked_Place4);
         Button_Place5.onClick.RemoveListener(OnClicked_Place5);
+        Button_Place6.onClick.RemoveListener(OnClicked_Place6);
+        Button_Place7.onClick.RemoveListener(OnClicked_Place7);
     }
 
     private void Update()
@@ -204,6 +210,22 @@ public class UIMain : MonoBehaviour
     {
         var a = PlayerTransform.position;
         a.x = PlaceXArray[4];
+
+        PlayerTransform.position = a;
+    }
+
+    private void OnClicked_Place6()
+    {
+        var a = PlayerTransform.position;
+        a.x = PlaceXArray[5];
+
+        PlayerTransform.position = a;
+    }
+
+    private void OnClicked_Place7()
+    {
+        var a = PlayerTransform.position;
+        a.x = PlaceXArray[6];
 
         PlayerTransform.position = a;
     }

@@ -4,6 +4,7 @@ Shader "RM2/Test"
     {
         _Color ("Main Color (A=Opacity)", Color) = (1,1,1,1)
         _MainTex ("Base (A=Opacity)", 2D) = ""
+        _Surface("Surface", float) = 1
     }
 
     Category
